@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>항공권 검색 결과</title>
+    <style>
+        .result-list {
+            max-width: 800px;
+            margin: 20px auto;
+            font-family: Arial, sans-serif;
+        }
+        .result-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 20px;
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            margin-bottom: 10px;
+        }
+        .airline-info {
+            display: flex;
+            align-items: center;
+        }
+        .airline-logo {
+            width: 32px;
+            height: 32px;
+            margin-right: 10px;
+        }
+        .airline-name {
+            font-size: 18px;
+            font-weight: bold;
+        }
+        .co2-info {
+            font-size: 12px;
+            color: green;
+            margin-left: 5px;
+        }
+        .flight-info {
+            text-align: center;
+        }
+        .flight-info span {
+            display: block;
+        }
+        .flight-time {
+            font-size: 18px;
+            font-weight: bold;
+        }
+        .flight-duration {
+            color: #666;
+        }
+        .price-info {
+            text-align: right;
+        }
+        .price-button {
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 16px;
+            font-weight: bold;
+            color: white;
+            background-color: red;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+        }
+        .price-button:hover {
+            background-color: darkred;
+        }
+    </style>
+</head>
+<body>
+<div class="result-list">
+
+    <!-- routes가 비어 있을 때 "조건에 맞는 항공권이 없습니다" 메시지 표시 -->
+    <div th:if="${#lists.isEmpty(routes)}" style="text-align: center; margin-top: 20px;">
+        <p>조건에 맞는 항공권이 없습니다.</p>
+        <button onclick="goBackToPreviousPage()" style="padding: 10px 20px; font-size: 16px; cursor: pointer;">
+            돌아가기
+        </button>
+        <script type="text/javascript">
+            function goBackToPreviousPage() {
+                history.back(); // 이전 페이지로 돌아가기
+            }
+        </script>
+    </div>
+
+
+    <!-- routes가 비어 있지 않을 때만 항공권 정보를 렌더링 -->
+    <div th:if="${!#lists.isEmpty(routes)}">
+        <h1><span th:text="${firstRoute.departure}"></span> <--> <span th:text="${firstRoute.arrival}"></span> 항공권 검색 결과</h1>
+        <div th:each="route : ${routes}" class="result-item">
+
+            <!-- 항공사 정보 -->
+            <div class="airline-info">
+                <div>
+                    <p class="airline-name" th:text="${route.airline}">에어로케이</p>
+                </div>
+            </div>
+
+            <!-- 출발/도착 시간 정보 -->
+            <div class="flight-info">
+                <span class="flight-time">
+                    <span th:text="${route.departure_time}">08:25</span>
+                    <span th:text="${route.departure}">ICN</span> ➔ <span th:text="${route.arrival_time}">10:55</span> <span th:text="${route.arrival}">NRT</span>
+                </span>
+                <span class="flight-duration" th:text="'소요 시간: ' + ${route.duration}">소요 시간: 2시간 30분</span>
+            </div>
+
+            <!-- 가격 정보 (버튼 형태) -->
+            <div class="price-info">
+                <a th:href="${route.id}" class="price-button" th:text="'편도 ' + ${route.price} + '원~'">편도 110,100원~</a>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

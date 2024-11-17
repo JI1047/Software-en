@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>항공권 검색 페이지</title>
+    <link rel="stylesheet" href="/mainStyle.css" />
+</head>
+<body>
+<header>
+    <nav class="title">
+        <div class="logo">
+            <h2>3Team</h2>
+        </div>
+        <ul class="menu">
+            <li><a href="#guide">예약안내</a></li>
+            <li><a href="#info">운항정보</a></li>
+            <li><a href="/air/Search">예약조회</a></li>
+            <input type="checkbox" id="checkbox" />
+            <label for="checkbox" class="toggle">
+                <div class="bars" id="bar1"></div>
+                <div class="bars" id="bar2"></div>
+                <div class="bars" id="bar3"></div>
+            </label>
+        </ul>
+    </nav>
+</header>
+<main>
+    <h2>안양대 여행상품</h2>
+    <h5>즐거운 여행이 되시길 바랍니다.</h5>
+    <section id="flight-booking">
+        <!-- 항공권 예매 폼 -->
+        <div id="flight-booking-container">
+            <div id="flight-booking1">
+                <form action="/air/Result" method="GET" class="booking-form">
+                    <div class="booking-options">
+                        <label for="roundTrip" class="trip-option active">
+                            <input type="radio" name="trip-type" value="round-trip" id="roundTrip" checked hidden> 왕복
+                        </label>
+                        <label for="oneWay" class="trip-option">
+                            <input type="radio" name="trip-type" value="one-way" id="oneWay" hidden> 편도
+                        </label>
+                    </div>
+
+                    <div class="flight-details">
+                        <select name="departure" id="departure" required>
+                            <option value="" disabled selected>출발지</option>
+                            <option th:each="airport : ${airports}"
+                                    th:text="${airport.name}"></option>
+                        </select>
+                        <button type="button" id="swap-btn">⇄</button>
+                        <select name="arrival" id="arrival" required>
+                            <option value="" disabled selected>도착지</option>
+                            <option th:each="airport : ${airports}"
+                                    th:text="${airport.name}"></option>
+                        </select>
+                        <input type="date" name="departure_day" required placeholder="출발 날짜">
+                        <input type="date" name="return_date" id="returnDate" placeholder="도착 날짜" style="display: inline-block;">
+                        <!-- 왕복일 경우에만 표시될 도착 날짜 필드 -->
+                        <button type="submit" class="search">항공권 검색</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+</main>
+
+<script>
+    // 목적지 스왑 기능
+    document.getElementById("swap-btn").addEventListener("click", function () {
+        const departureSelect = document.getElementById("departure");
+        const arrivalSelect = document.getElementById("arrival");
+
+        const tempValue = departureSelect.value;
+        departureSelect.value = arrivalSelect.value;
+        arrivalSelect.value = tempValue;
+    });
+
+    // 왕복과 편도 선택 시 도착 날짜 필드 토글
+    document.getElementById("oneWay").addEventListener("click", function () {
+        setTripType("oneWay");
+    });
+
+    document.getElementById("roundTrip").addEventListener("click", function () {
+        setTripType("roundTrip");
+    });
+    // trip-option 클래스에 클릭 이벤트 추가
+    document.querySelectorAll('.trip-option').forEach(label => {
+        label.addEventListener('click', function() {
+            // 모든 trip-option에서 active 클래스 제거
+            document.querySelectorAll('.trip-option').forEach(option => option.classList.remove('active'));
+
+            // 현재 클릭된 trip-option에 active 클래스 추가
+            this.classList.add('active');
+
+            // 해당 라디오 버튼을 선택 처리
+            this.querySelector('input').checked = true;
+        });
+    });
+
+    function setTripType(type) {
+        const returnDateInput = document.getElementById("returnDate");
+        if (returnDateInput) {
+            returnDateInput.style.display = (type === "oneWay") ? "none" : "inline-block";
+        }
+    }
+
+    document.addEventListener("DOMContentLoaded", function () {
+        setTripType("roundTrip");
+    });
+</script>
+</body>
+</html>
