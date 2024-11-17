@@ -30,7 +30,7 @@
 
 <main>
 
-    <div class = "content-wrapper" th:if="${#lists.isEmpty(routes)}">
+    <div th:if="${#lists.isEmpty(routes)}">
         <p>조건에 맞는 항공권이 없습니다.</p>
         <button onclick="goBackToPreviousPage()" style="padding: 10px 20px; font-size: 16px; cursor: pointer;">
             돌아가기
@@ -42,7 +42,7 @@
         </script>
     </div>
     <!-- 항공권 정보 바 -->
-    <div class = "content-wrapper" th:if="${!#lists.isEmpty(routes)}">
+    <div th:if="${!#lists.isEmpty(routes)}">
         <div class="bar-container">
             <div class="bar">
                 <div class="div-wrapper">

@@ -65,7 +65,7 @@ body {
 }
 
 /* 메인 콘텐츠 스타일 */
-.content-wrapper {
+main {
     padding: 1em;
     max-width: 1000px;
     margin: 0 auto;
