@@ -1,144 +1,131 @@
+
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>항공권 검색 결과</title>
-    <style>
-        /* 전체 컨테이너 */
-        .result-list {
-            max-width: 900px;
-            margin: 20px auto;
-            font-family: Arial, sans-serif;
-            color: #333;
-        }
-
-        /* 개별 항공권 아이템 */
-        .result-item {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 20px;
-            background-color: #f9f9f9;
-            border: 1px solid #ddd;
-            border-radius: 10px;
-            margin-bottom: 15px;
-            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-        }
-
-        /* 항공사 정보 */
-        .airline-info {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        .airline-logo {
-            width: 32px;
-            height: 32px;
-        }
-        .airline-name {
-            font-size: 18px;
-            font-weight: bold;
-        }
-
-        /* 출발/도착 시간 정보 */
-        .flight-info {
-            text-align: center;
-        }
-        .flight-time {
-            font-size: 16px;
-            font-weight: bold;
-            margin-bottom: 5px;
-        }
-        .flight-duration {
-            font-size: 14px;
-            color: #777;
-        }
-
-        /* 가격 정보 */
-        .price-info {
-            text-align: right;
-        }
-        .price-button {
-            display: inline-block;
-            padding: 10px 20px;
-            font-size: 16px;
-            font-weight: bold;
-            color: white;
-            background-color: #608ff1;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            text-decoration: none;
-        }
-        .price-button:hover {
-            background-color: #507ac1;
-        }
-
-        /* 헤더 스타일 */
-        h1 {
-            text-align: center;
-            font-size: 24px;
-            color: #555;
-            margin-bottom: 30px;
-        }
-
-        /* 비어 있을 때의 메시지 스타일 */
-        .no-result {
-            text-align: center;
-            font-size: 18px;
-            color: #999;
-            margin-top: 50px;
-        }
-        .no-result button {
-            padding: 10px 20px;
-            font-size: 16px;
-            background-color: #608ff1;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-    </style>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>운항 정보</title>
+    <link rel="stylesheet" href="/mainStyle.css" />
+    <link rel="stylesheet" href="/info_bar.css" />
 </head>
 <body>
-<div class="result-list">
+<header>
+    <nav class="title">
+        <div class="logo">
+            <h2>3Team</h2>
+        </div>
+        <ul class="menu">
+            <li><a href="#guide">예약안내</a></li>
+            <li><a href="#info">운항정보</a></li>
+            <li><a href="#view">예약조회</a></li>
+            <input type="checkbox" id="checkbox" />
+            <label for="checkbox" class="toggle">
+                <div class="bars" id="bar1"></div>
+                <div class="bars" id="bar2"></div>
+                <div class="bars" id="bar3"></div>
+            </label>
+        </ul>
+    </nav>
+</header>
 
-    <!-- routes가 비어 있을 때 -->
-    <div th:if="${#lists.isEmpty(routes)}" class="no-result">
+<main>
+
+    <div class = "content-wrapper" th:if="${#lists.isEmpty(routes)}">
         <p>조건에 맞는 항공권이 없습니다.</p>
-        <button onclick="history.back()">돌아가기</button>
+        <button onclick="goBackToPreviousPage()" style="padding: 10px 20px; font-size: 16px; cursor: pointer;">
+            돌아가기
+        </button>
+        <script type="text/javascript">
+            function goBackToPreviousPage() {
+                history.back(); // 이전 페이지로 돌아가기
+            }
+        </script>
     </div>
-
-    <!-- routes가 있을 때 -->
-    <div th:if="${!#lists.isEmpty(routes)}">
-        <h1>
-            <span th:text="${firstRoute.departure}">인천</span> ➔
-            <span th:text="${firstRoute.arrival}">제주</span> 항공권 검색 결과
-        </h1>
-        <div th:each="route : ${routes}" class="result-item">
-
-            <!-- 항공사 정보 -->
-            <div class="airline-info">
-
-                <span class="airline-name" th:text="${route.airline}">아시아나항공</span>
-            </div>
-
-            <!-- 출발/도착 시간 정보 -->
-            <div class="flight-info">
-                <div class="flight-time">
-                    <span th:text="${route.departure_time}">06:40</span> ➔
-                    <span th:text="${route.arrival_time}">07:50</span>
+    <!-- 항공권 정보 바 -->
+    <div class = "content-wrapper" th:if="${!#lists.isEmpty(routes)}">
+        <div class="bar-container">
+            <div class="bar">
+                <div class="div-wrapper">
+                    <div class="text-wrapper-2" id="trip-type">편도</div>
                 </div>
-                <div class="flight-duration" th:text="'소요 시간: ' + ${route.duration}">소요 시간: 1시간 10분</div>
-            </div>
+                <div class="view">
+                    <div class="frame">
+                        <div class="text-wrapper" id="departure-city" th:text="${firstRoute.departure}">인천</div>
 
-            <!-- 가격 정보 -->
-            <div class="price-info">
-                <a th:href="'/booking/' + ${route.id}" class="price-button" th:text="'편도 ' + ${route.price} + '원'">편도 66,600원</a>
+                        <!--                        <img class="icons-travels-take" src="/picture/take-off-one.png" />-->
+                        <div class="text-wrapper" id="arrival-city" th:text="${firstRoute.arrival}">제주</div>
+                    </div>
+                    <div class="div" id="departure-date-display" th:text="${firstRoute.departureDay}">2024.11.23.토</div>
+                </div>
+                <div class="search">
+                    <button class="search-button" onclick="window.location.href='Booking.html'">재검색</button>
+                </div>
             </div>
         </div>
+
+        <!-- 독립적인 bar 영역 -->
+        <div class="bar">
+            <div class="left-content">
+                <!--                <img class="icons-travels" src="/picture/pennant.png" alt="pennant icon" />-->
+                <span class="text-wrapper-5" th:text="${firstRoute.arrival + ' 가는 편도'}">제주 가는 편도</span>
+            </div>
+            <div class="right-content">
+                <button class="sort-button" id="sort-asc">가격 ↑</button>
+                <button class="sort-button" id="sort-desc">가격 ↓</button>
+                <div class="view-2">
+                    <span class="text-wrapper-8">최신 업데이트</span>
+                    <span class="text-wrapper-9" id="last-update-time">00:00:00</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- 운항 정보 티켓 -->
+        <div class="info-ticket">
+            <div class="frame">
+                <div th:each="route : ${routes}" class="result-item">
+                    <span class="text-wrapper" th:text="${route.airline}">아시아나항공</span>
+                    <span class="time departure-time" th:text="${route.departure_time}">06:40</span>
+                    <!--                    <img class="icons-travels-take" src="/picture/take-off.png" alt="take-off icon" />-->
+                    <span class="time arrival-time" th:text="${route.arrival_time}">07:50</span>
+                    <span class="text-wrapper-4" th:text="${route.duration}">1시간 10분</span>
+                    <span class="text-wrapper-3" th:text="${route.price}">66,600원</span>
+                </div>
+            </div>
+            <hr>
+            <button class="more-button">More</button>
+        </div>
     </div>
-</div>
+</main>
+
+<script>
+
+    // 편도/왕복에 따라 텍스트 표시
+    const tripType = returnDate ? "왕복" : "편도";
+    document.getElementById("trip-type").textContent = tripType;
+</script>
+<script>
+    // 현재 시간을 "시:분:초 AM/PM" 형식으로 반환하는 함수
+    function getCurrentTime() {
+        const now = new Date();
+        let hours = now.getHours();
+        const minutes = String(now.getMinutes()).padStart(2, '0'); // 분
+        const seconds = String(now.getSeconds()).padStart(2, '0'); // 초
+        const period = hours >= 12 ? 'PM' : 'AM'; // 오전/오후 설정
+
+        // 12시간 체계로 변환
+        hours = hours % 12 || 12; // 0시를 12시로 변환
+
+        return `${hours}:${minutes}:${seconds} ${period}`;
+    }
+
+    // 최신 업데이트 시간을 설정
+    function updateLastUpdateTime() {
+        const lastUpdateTimeElement = document.getElementById('last-update-time');
+        lastUpdateTimeElement.textContent = getCurrentTime();
+    }
+
+    // 페이지 로드 시 최신 업데이트 시간 표시
+    document.addEventListener('DOMContentLoaded', updateLastUpdateTime);
+</script>
 </body>
 </html>
