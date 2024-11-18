@@ -26,8 +26,8 @@ public class AirRoute {
     private String arrival;
     private String departureDay;
     private String arrivalDay;
-    private LocalTime departure_time; // String -> LocalTime
-    private LocalTime arrival_time;   // String -> LocalTime
+    private LocalTime departureTime; // String -> LocalTime
+    private LocalTime arrivalTime;   // String -> LocalTime
 
     private String duration;
     public AirRoute(String airline, Integer price, String departure, String arrival,
@@ -38,7 +38,7 @@ public class AirRoute {
         this.arrival = arrival;
         this.departureDay = departureDay;
         this.arrivalDay = arrivalDay;
-        this.departure_time = departureTime;
-        this.arrival_time = arrivalTime;
+        this.departureTime = departureTime;
+        this.arrivalTime = arrivalTime;
     }
 }

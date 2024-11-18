@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>사용자 정보 입력</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 600px;
+      margin: 20px auto;
+      padding: 20px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      background-color: #f9f9f9;
+    }
+    h1 {
+      font-size: 24px;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    .form-group {
+      margin-bottom: 15px;
+    }
+    label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: bold;
+    }
+    input, select, textarea {
+      width: 100%;
+      padding: 8px;
+      margin-top: 5px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      font-size: 14px;
+    }
+    button {
+      display: block;
+      width: 100%;
+      padding: 10px;
+      font-size: 16px;
+      font-weight: bold;
+      background-color: #5cb85c;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #4cae4c;
+    }
+  </style>
+</head>
+<body>
+<h1>사용자 정보 입력</h1>
+<form action="/submitUserInfo" method="post">
+  <!-- 이름 -->
+  <div class="form-group">
+    <label for="name">이름</label>
+    <input type="text" id="name" name="name" placeholder="이름을 입력하세요" required>
+  </div>
+
+  <!-- 성별 -->
+  <div class="form-group">
+    <label for="gender">성별</label>
+    <select id="gender" name="gender" required>
+      <option value="" disabled selected>성별을 선택하세요</option>
+      <option value="male">남성</option>
+      <option value="female">여성</option>
+    </select>
+  </div>
+
+  <!-- 주소 -->
+  <div class="form-group">
+    <label for="address">주소</label>
+    <textarea id="address" name="address" rows="3" placeholder="주소를 입력하세요" required></textarea>
+  </div>
+
+  <!-- 이메일 -->
+  <div class="form-group">
+    <label for="email">이메일</label>
+    <input type="email" id="email" name="email" placeholder="example@example.com" required>
+  </div>
+
+  <!-- 제출 버튼 -->
+  <button type="submit">제출</button>
+</form>
+</body>
+</html>

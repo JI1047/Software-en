@@ -29,7 +29,7 @@ public class AirRouteServiceImpl implements AirRouteService {
         List<AirRoute> routes = airRouteRepository.findByDepartureAndArrivalAndDepartureDay(inDto.getDeparture(), inDto.getArrival(), inDto.getDepartureDay());
 
         // 각 항공편에 대해 소요 시간 계산
-        routes.forEach(route -> route.setDuration(calculateDuration(route.getDeparture_time(), route.getArrival_time())));
+        routes.forEach(route -> route.setDuration(calculateDuration(route.getDepartureTime(), route.getArrivalTime())));
 
         return routes;
     }

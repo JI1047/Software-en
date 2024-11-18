@@ -1,0 +1,257 @@
+/* General Styles */
+body {
+    margin: 0;
+    font-family: "Inter", Helvetica, Arial, sans-serif;
+}
+
+.ps-page {
+    max-width: 600%;
+    width: 600px;
+    margin: 10px auto;
+    padding: 20px 20px 0px 20px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.header {
+    text-align: left;
+    border-radius: 7px;
+    background-color: #608FF1;
+    padding: 10px;
+}
+
+.title_page {
+    font-size: 24px;
+    font-weight: 600;
+    color:  #ffffff;
+    margin: 0 0 10px;
+    height: 40px;
+}
+
+.line {
+    border: 0;
+    border-top: 1px solid #ffffff;
+}
+
+/* Horizontal Layout */
+.info-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    padding: 2px;
+}
+
+.ticket-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 13px;
+    margin-top: 10px;
+    margin-left: 10px;
+}
+
+.ticket-type {
+    font-size: 18px;
+    font-weight: bold;
+    color: #333333;
+}
+
+.destination {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.location {
+    font-size: 16px;
+    font-weight: 500;
+    color: #333333;
+}
+
+.date {
+    font-size: 15px;
+    color: #666666;
+}
+
+.time-info {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.time {
+    font-size: 18px;
+    font-weight: 400px;
+    color: #000000;
+}
+
+.price {
+    font-size: 18px;
+    font-weight: bold;
+    color: darkred;
+    border: none;
+    border-radius: 5px;
+    margin: 20px 5px 0px 20px;
+
+}
+
+.passenger-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 15px;
+}
+
+.passenger {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.age-group {
+    font-size: 17px;
+    color: #666666;
+}
+
+.minus {
+    color: red;
+    width: 30px;
+    height: 30px;
+    background-color: #d3d0d0;
+    border: none;
+    border-radius: 50%;
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+    line-height: 30px;
+    cursor: pointer;
+}
+
+.plus {
+    color: blue;
+    width: 30px;
+    height: 30px;
+    background-color: #d3d0d0;
+    border: none;
+    border-radius: 50%;
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+    line-height: 30px;
+    cursor: pointer;
+}
+
+.count {
+    font-size: 16px;
+    font-weight: bold;
+}
+
+/* Seat Section */
+.seat-rank {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.seat {
+    padding: 10px 20px;
+    text-align: center;
+    background-color: #ffffff;
+    border: 1px solid #dddddd;
+    border-radius: 5px;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    height: 40px;
+}
+.seat.selected {
+    background-color: #608FF1; /* 선택된 좌석의 배경색 */
+    color: white; /* 텍스트 색상 */
+    font-weight: bold; /* 강조 효과 */
+    border: 2px solid #4b71c3;
+}
+
+.seat:hover {
+    background-color: #f0f0f0;
+}
+
+.book_button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    max-width: 100%;
+}
+
+.book {
+    padding: 8px 5px 8px 5px;
+    text-align: center;
+    background-color: #608FF1;
+    border: none;
+    border-radius: 5px;
+    font-size: 17px;
+    color: #ffffff;
+    cursor: pointer;
+    height: 35px;
+    width: 100%;
+}
+
+.book:hover {
+    background-color: #4b71c3;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+    .info-row {
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+
+    .time-info {
+        justify-content: flex-start;
+    }
+
+    .passenger-info {
+        align-items: flex-start;
+    }
+}
+
+@media (max-width: 768px) {
+    .title {
+        font-size: 20px;
+    }
+
+    .info-row {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .seat-rank {
+        flex-wrap: wrap;
+        gap: 15px;
+    }
+}
+
+@media (max-width: 480px) {
+    .ticket-info,
+    .time-info,
+    .passenger-info {
+        text-align: center;
+    }
+
+    .passenger {
+        justify-content: center;
+    }
+
+    .seat {
+        padding: 10px;
+        font-size: 12px;
+    }
+}

@@ -7,16 +7,14 @@ import hello.software_engineering.dto.in.FindAirRouteInDto;
 import hello.software_engineering.repository.AirRouteRepository;
 import hello.software_engineering.service.AirRouteService;
 import hello.software_engineering.service.AirportService;
+import hello.software_engineering.service.TicketService;
 import jakarta.annotation.PostConstruct;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.CacheControl;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalTime;
 import java.util.List;
@@ -28,6 +26,7 @@ public class AirController {
 
     private final AirportService airportService;
     private final AirRouteService airRouteService;
+    private final TicketService ticketService;
     @GetMapping
     public String home(Model model) {
         List<Airport> airports = airportService.getAllAirports();
@@ -64,6 +63,25 @@ public class AirController {
         model.addAttribute("seatClass", SeatClass.values());
         return "basic/Airline";
     }
+
+    @PostMapping("/{id}")
+    public String reserve(
+            @PathVariable("id") Long airRouteId,
+            @RequestParam("seatClass") String seatClass,
+            @RequestParam("adultCount") int adultCount,
+            @RequestParam("childCount") int childCount,
+            @RequestParam("totalPrice") int totalPrice) {
+
+        ticketService.save(airRouteId,seatClass,adultCount,childCount,totalPrice);
+
+        // 예약 처리 로직 추가
+        return "basic/userInformation";
+    }
+    @GetMapping("/userInformation")
+    public String userInformation() {
+        return "basic/userInformation";
+    }
+
 
 
 

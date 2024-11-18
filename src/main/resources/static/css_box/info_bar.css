@@ -1,0 +1,286 @@
+/* bar-container 초기 스타일 복원 */
+.bar-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    max-width: 964px;
+    height: 40vh;
+    margin-top: -10vh;
+    padding: 100px;
+    box-sizing: border-box;
+}
+
+/* bar-container 내부의 bar */
+.bar-container .bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 500px;
+    height: 60px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0px 7px 10px #0000001a;
+    padding: 0 20px;
+    box-sizing: border-box;
+    position: relative;
+}
+
+/* 개별 bar 스타일 */
+.bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    max-width: 964px;
+    height: 50px;
+    background-color: #608ff1;
+    border-radius: 10px 10px 0px 0px;
+    padding: 0 20px;
+    box-sizing: border-box;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    margin-bottom: 0;
+}
+
+.bar .frame {
+    display: inline-flex;
+    align-items: center;
+    gap: 31px;
+    position: relative;
+    flex: 0 0 auto;
+}
+
+.bar .text-wrapper {
+    position: relative;
+    width: fit-content;
+    margin-top: -1.00px;
+    font-family: "Inter-Medium", Helvetica;
+    font-weight: 500;
+    color: #000000;
+    font-size: 20px;
+    letter-spacing: 0;
+    line-height: normal;
+}
+
+.bar .div-wrapper {
+    position: absolute;
+    width: 69px;
+    height: 60px;
+    top: 0;
+    left: 0;
+    background-color: #ffffff;
+    border-radius: 10px 0px 0px 10px;
+    overflow: hidden;
+}
+
+.bar .text-wrapper-2 {
+    position: absolute;
+    top: 17px;
+    left: 16px;
+    font-family: "Inter-SemiBold", Helvetica;
+    font-weight: 600;
+    color: #608ff1;
+    font-size: 20px;
+    letter-spacing: 0;
+    line-height: normal;
+    white-space: nowrap;
+}
+
+/* more-button 스타일 */
+.more-button {
+    display: block; /* 중앙 정렬을 위해 블록 요소로 설정 */
+    margin: 0px auto; /* 가운데 정렬 및 위아래 여백 추가 */
+    padding: 10px 10px; /* 버튼 내부 여백 */
+    font-family: "Inter-SemiBold", Helvetica;
+    font-size: 14px;
+    color: #070707;
+    background-color: #ffffff; /* 기본 배경색 */
+    border: none; /* 테두리 제거 */
+    border-radius: 8px; /* 버튼 모서리를 부드럽게 */
+    cursor: pointer;
+    transition: all 0.3s ease; /* 부드러운 전환 효과 */
+}
+
+.more-button:hover {
+    background-color: #0000001a; /* 마우스를 올렸을 때 색상 */
+}
+
+/* search 박스 */
+.bar-container .search {
+    position: absolute;
+    right: 20px; /* 항상 bar의 오른쪽 끝에 위치 */
+    top: 50%;
+    transform: translateY(-50%); /* 세로 정렬 */
+    width: 100px; /* 넉넉한 폭으로 텍스트 오버플로우 방지 */
+    height: 40px;
+    background-color: #608ff1;
+    border-radius: 10px 10px 10px 10px;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.15);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.bar-container .search-button {
+    width: 100%;
+    height: 100%;
+    padding-bottom: 15px;
+    background-color: #608ff1;
+    color: #ffffff;
+    font-family: "Inter-SemiBold", Helvetica;
+    font-size: 16px; /* 텍스트 크기를 줄여서 박스 안에 맞춤 */
+    border: none;
+    border-radius: 0px 10px 10px 0px;
+    text-align: center;
+    line-height: 1; /* 텍스트 정렬 */
+    white-space: nowrap; /* 텍스트 줄바꿈 방지 */
+}
+
+/* 반응형 디자인 */
+@media screen and (max-width: 768px) {
+    .bar-container {
+        width: 90%; /* 화면 크기에 따라 bar-container 폭을 줄임 */
+    }
+
+    .bar-container .search {
+        width: 80px; /* 화면이 작아지면 search 박스 크기 조정 */
+        font-size: 14px; /* 텍스트 크기 축소 */
+    }
+}
+/* ----------------------------------------------------------------------------------------------- */
+/* bar 내부 왼쪽, 오른쪽 콘텐츠 정렬 */
+.bar .left-content {
+    display: flex;
+    align-items: center;
+}
+
+.bar .left-content img {
+    margin-right: 10px;
+}
+
+.bar .text-wrapper-5 {
+    font-family: "Inter-SemiBold", Helvetica;
+    font-size: 18px;
+    color: #ffffff;
+}
+
+.bar .right-content {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+/* sort-button 스타일 */
+.sort-button {
+    padding: 10px 10px; /* 버튼 안의 여백 */
+    font-family: "Inter-SemiBold", Helvetica;
+    font-size: 14px;
+    color: #ffffff;
+    background-color: #608ff1; /* 기본 배경색 */
+    border: none; /* 기본 테두리 제거 */
+    border-radius: 8px; /* 버튼의 모서리를 부드럽게 */
+    cursor: pointer;
+    transition: all 0.3s ease; /* 부드러운 애니메이션 효과 */
+}
+
+.sort-button:hover {
+    background-color: #5a7ed7; /* 마우스 올렸을 때 색상 */
+}
+
+/* 버튼 간격 */
+.right-content .sort-button {
+    margin-right: 0px;
+}
+
+.bar .text-wrapper-6, .text-wrapper-7 {
+    font-family: "Inter-Medium", Helvetica;
+    font-size: 16px;
+    color: #ffffff;
+}
+
+.bar .text-wrapper-8, .text-wrapper-9 {
+    font-family: "Inter-Light", Helvetica;
+    font-size: 14px;
+    color: #ffffff;
+}
+
+.bar .view {
+    display: inline-flex;
+    align-items: center;
+    gap: 38px;
+    position: absolute;
+    top: 18px;
+    left: 122px;
+}
+/* ----------------------------------------------------------------------------------------------- */
+/* info-ticket 스타일 */
+.info-ticket {
+    position: relative;
+    width: 100%;
+    max-width: 964px;
+    margin-top: 0;
+    padding: 10px 0;
+    background-color: #ffffff;
+    border-radius: 0px 0px 10px 10px;
+    box-shadow: 0px 4px 7px #0000001a;
+    overflow: hidden;
+}
+
+/* info-ticket 내부 항공 정보 가로 정렬 */
+.info-ticket .frame {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px 20px;
+    box-sizing: border-box;
+}
+
+.info-ticket .text-wrapper {
+    font-family: "Inter-Medium", Helvetica;
+    font-size: 18px;
+    color: #000000;
+}
+
+.info-ticket .time {
+    font-family: "Inter-Regular", Helvetica;
+    font-size: 16px;
+    color: #000000;
+}
+
+.info-ticket .text-wrapper-4 {
+    font-family: "Inter-Regular", Helvetica;
+    font-size: 14px;
+    color: #000000;
+}
+
+.info-ticket .text-wrapper-3 {
+    font-family: "Inter-Bold", Helvetica;
+    font-size: 16px;
+    color: #c00000;
+}
+
+/* 아이콘 스타일 */
+.icons-travels, .icons-travels-take {
+    width: 24px;
+    height: 24px;
+}
+
+/* 구분선 */
+.info-ticket hr {
+    width: 100%;
+    height: 2px;
+    background-color: #e0e0e0;
+    border: none;
+    margin: 10px 0;
+}
+
+/* More 텍스트 가운데 정렬 */
+.info-ticket .text-wrapper-2 {
+    display: block;
+    text-align: center;
+    font-family: "Inter-Regular", Helvetica;
+    font-size: 14px;
+    color: #000000;
+    padding-top: 10px;
+}
