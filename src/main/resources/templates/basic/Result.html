@@ -66,14 +66,17 @@
         </div>
 
         <!-- 운항 정보 티켓 -->
-        <div class="info-ticket">
+        <div th:each="route : ${routes}" class="info-ticket">
             <div class="frame">
-                <span class="text-wrapper">아시아나항공</span>
-                <span class="time departure-time">06:40</span>
+                <span class="text-wrapper" th:text="${route.airline}">아시아나항공</span>
+                <span class="time departure-time" th:text="${route.departure_time}">06:40</span>
                 <img class="icons-travels-take" src="/picture/take-off.png"alt="take-off icon"/>
-                <span class="time arrival-time">07:50</span>
-                <span class="text-wrapper-4">1시간 10분</span>
-                <span class="text-wrapper-3">66,600원</span>
+                <span class="time arrival-time" th:text="${route.arrival_time}">07:50</span>
+                <span class="text-wrapper-4" th:text="${route.duration}">1시간 10분</span>
+                <a th:href="${route.id}" class="text-wrapper-3 button-like"
+                   th:text="'편도 ' + ${route.price} + '원'"></a>
+
+
             </div>
             <hr />
             <button class="more-button">More</button>
