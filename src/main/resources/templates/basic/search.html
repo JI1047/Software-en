@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AYU Flight</title>
+  <link rel="stylesheet" href="/css_box/style.css" />
+  <link rel="stylesheet" href="/css_box/view_style.css" />
+</head>
+<body>
+<header>
+  <nav class="title">
+    <div class="logo">
+      <h2>3Team</h2>
+    </div>
+    <ul class="menu">
+      <li><a href="#guide">예약안내</a></li>
+      <li><a href="#info">운항정보</a></li>
+      <li><a href="view.html">예약조회</a></li>
+      <input type="checkbox" id="checkbox" />
+      <label for="checkbox" class="toggle">
+        <div class="bars" id="bar1"></div>
+        <div class="bars" id="bar2"></div>
+        <div class="bars" id="bar3"></div>
+      </label>
+    </ul>
+  </nav>
+</header>
+<main>
+  <div class="view-input">
+    <div class="header">
+      <h3 class="title">PIN 번호로 검색</h3>
+    </div>
+    <form action="/air/search/result" method="get">
+      <div class="input-section pin-section">
+        <label for="pin-input" class="label">PIN 번호를 입력하세요</label>
+        <div class="input-group">
+          <span class="input-addon">PIN</span>
+          <input
+                  id="pin-input"
+                  type="text"
+                  name="pin"
+                  placeholder="PIN 입력"
+                  class="text-input"
+                  style="border: none"
+                  required
+          />
+        </div>
+      </div>
+      <div class="footer">
+        <button type="submit" class="submit-button">예약 검색</button>
+      </div>
+    </form>
+
+  </div>
+</main>
+</body>
+</html>
