@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>결제 페이지</title>
+    <style>
+        /* 기본 레이아웃 */
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            background-color: #f9f9f9;
+        }
+        h1 {
+            font-size: 24px;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        /* 정보 섹션 */
+        .info-section, .payment-section {
+            margin-bottom: 20px;
+            padding: 15px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            background-color: #fff;
+        }
+        .info-header {
+            font-size: 20px;
+            margin-bottom: 10px;
+            color: #0056b3;
+            font-weight: bold;
+        }
+        .info-details {
+            margin-bottom: 10px;
+        }
+        .info-details span {
+            display: inline-block;
+            margin-right: 10px;
+        }
+        .passenger-count {
+            margin: 10px 0;
+        }
+        .passenger-count span {
+            margin-right: 10px;
+        }
+
+        /* 좌석 등급 */
+        .seat-rank {
+            margin-top: 15px;
+        }
+        .seat {
+            display: inline-block;
+            padding: 10px 15px;
+            margin: 5px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: #f1f1f1;
+            cursor: pointer;
+        }
+        .seat.selected {
+            background-color: #0056b3;
+            color: white;
+        }
+
+        /* 가격 섹션 */
+        .price-section {
+            font-size: 20px;
+            color: red;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+
+        /* 결제 섹션 */
+        .payment-section {
+            background-color: #fdfdfd;
+        }
+        .account-details {
+            font-size: 18px;
+            color: #333;
+            margin-top: 15px;
+        }
+
+        /* 버튼 스타일 */
+        button {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            font-size: 18px;
+            font-weight: bold;
+            background-color: #5cb85c;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+        button:hover {
+            background-color: #4cae4c;
+        }
+    </style>
+</head>
+<body>
+<h1>항공 예약 결제</h1>
+
+<!-- 예약 정보 섹션 -->
+<div class="info-section">
+    <div class="info-header">항공 예약 상세 정보</div>
+    <div class="info-details">
+        <span>편도</span>
+        <span>출발: <span th:text="${airRoute.departure}">인천</span></span>
+        <span>도착: <span th:text="${airRoute.arrival}">제주</span></span>
+    </div>
+    <div class="info-details">
+        <span>날짜: <span th:text="${airRoute.departureDay}">2024-11-22</span></span>
+        <span>출발 시간: <span th:text="${airRoute.departureTime}">14:25</span></span>
+        <span>도착 시간: <span th:text="${airRoute.arrivalTime}">18:55</span></span>
+    </div>
+    <div class="passenger-count">
+        <span>성인: <span th:text="${ticket.adultCount}">1</span>명</span>
+        <span>아동: <span th:text="${ticket.childCount}">1</span>명</span>
+    </div>
+    <div class="seat-rank">
+        <div class="seat" th:text="${ticket.seatClass}">일반석</div>
+    </div>
+    <input type="hidden" id="seatClass" name="seatClass" value="일반석">
+
+    <div class="price-section">
+        ₩<span th:text="${ticket.totalPrice}">75,000</span>
+    </div>
+</div>
+
+<!-- 결제 정보 섹션 -->
+<div class="payment-section">
+    <div class="info-header">결제 정보</div>
+    <div class="account-details">
+        <p><strong>무통장 입금 계좌</strong></p>
+        <p>은행명: 국민은행</p>
+        <p>계좌번호: 123-456-789012</p>
+        <p>예금주: 3Team 항공</p>
+    </div>
+</div>
+
+<!-- 확인 버튼 -->
+<a th:href="@{/air/success(ticketId=${ticket.id})}">결제 확인</a>
+
+</body>
+</html>

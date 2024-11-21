@@ -4,4 +4,7 @@ import hello.software_engineering.domain.ticket.Ticket;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface TicketRepository extends JpaRepository<Ticket, Long> {
+    Ticket findByGroupId(Long groupId);
+
+    Ticket findByPinCode(String pinCode);
 }

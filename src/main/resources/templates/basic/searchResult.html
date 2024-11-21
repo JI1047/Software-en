@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>검색 결과</title>
+</head>
+<body>
+<header>
+  <h1>검색 결과</h1>
+</header>
+<main>
+  <div>
+    <p>예약번호: <span th:text="${ticket.id}">12345</span></p>
+    <p>출발지: <span th:text="${ticket.airRoute.departure}">서울</span></p>
+    <p>도착지: <span th:text="${ticket.airRoute.arrival}">부산</span></p>
+    <p>좌석 등급: <span th:text="${ticket.seatClass}">일반석</span></p>
+  </div>
+  <a href="/search">다시 검색</a>
+</main>
+</body>
+</html>

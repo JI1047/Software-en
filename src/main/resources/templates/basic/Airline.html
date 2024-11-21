@@ -32,8 +32,9 @@
             <h1 class="title_page">항공 예약 상세 페이지</h1>
             <hr class="line"/>
         </section>
-        <form th:action="@{/air/{id}(id=${route.id})}" method="post">
-            <section class="info-row">
+        <form th:action="@{/air/{airRouteId}(airRouteId=${route.id})}" method="post">
+
+        <section class="info-row">
                 <!-- Ticket Type -->
                 <div class="ticket-info">
                     <span class="ticket-type">편도</span>
@@ -103,10 +104,10 @@
 
                 </div>
                 <div class="seat-rank">
-                    <div class="seat" onclick="selectSeat('economy')">일반석</div>
-                    <div class="seat" onclick="selectSeat('premiumEconomy')">프리미엄 일반석</div>
-                    <div class="seat" onclick="selectSeat('business')">비즈니스석</div>
-                    <div class="seat" onclick="selectSeat('first')">일등석</div>
+                    <div class="seat" onclick="selectSeat('일반석')">일반석</div>
+                    <div class="seat" onclick="selectSeat('프리미엄 일반석')">프리미엄 일반석</div>
+                    <div class="seat" onclick="selectSeat('비즈니스석')">비즈니스석</div>
+                    <div class="seat" onclick="selectSeat('일등석')">일등석</div>
                     <input type="hidden" id="seatClass" name="seatClass" value="economy">
                 </div>
 
@@ -122,31 +123,32 @@
     </div>
 
     <script type="text/javascript">
-        function selectSeat(seatClass) {
+        function selectSeat(seatText) {
             // 모든 좌석에서 'selected' 클래스 제거
             const seats = document.querySelectorAll('.seat');
             seats.forEach(seat => seat.classList.remove('selected'));
 
             // 선택된 좌석에 'selected' 클래스 추가
-            const selectedSeat = Array.from(seats).find(seat => seat.textContent.includes(seatClassToText(seatClass)));
+            const selectedSeat = Array.from(seats).find(seat => seat.textContent === seatText);
             if (selectedSeat) {
                 selectedSeat.classList.add('selected');
             }
 
-            // hidden input에 선택된 좌석 값 설정
-            document.getElementById("seatClass").value = seatClass;
+            // hidden input에 선택된 좌석 값을 설정
+            document.getElementById("seatClass").value = seatText;
 
             // 총 가격 계산 함수 호출
             calculateTotal();
         }
 
+
         // 좌석 클래스 이름을 사용자 표시 텍스트와 매핑
         function seatClassToText(seatClass) {
-            const mapping = {
-                economy: "일반석",
-                premiumEconomy: "프리미엄 일반석",
-                business: "비즈니스석",
-                first: "일등석"
+            const seatPrices = {
+                "일반석": 50000,
+                "프리미엄 일반석": 100000,
+                "비즈니스석": 150000,
+                "일등석": 200000,
             };
             return mapping[seatClass];
         }
@@ -172,10 +174,10 @@
 
         // 좌석 가격 매핑
         const seatPrices = {
-            economy: 50000,
-            premiumEconomy: 100000,
-            business: 150000,
-            first: 200000,
+            "일반석": 50000,
+            "프리미엄 일반석": 100000,
+            "비즈니스석": 150000,
+            "일등석": 200000,
         };
 
         // 총 금액 계산 함수
@@ -199,6 +201,7 @@
             // hidden input 업데이트
             document.getElementById("totalPriceInput").value = totalPrice;
         }
+
 
     </script>
 </main>

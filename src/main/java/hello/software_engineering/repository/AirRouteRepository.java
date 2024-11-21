@@ -17,4 +17,6 @@ public interface AirRouteRepository extends JpaRepository<AirRoute, Long> {
     AirRoute findAirRouteById(Long id);
 
 
+
+
 }
