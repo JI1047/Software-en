@@ -30,59 +30,59 @@
 
 <main>
 
-        <div class="bar-container">
-            <div class="bar">
-                <div class="div-wrapper">
-                    <div class="text-wrapper-2" id="trip-type">편도</div>
-                </div>
-                <div class="view">
-                    <div class="frame">
-                        <div class="text-wrapper" id="departure-city" th:text="${firstRoute.departure}">인천</div>
-
-                        <!--                        <img class="icons-travels-take" src="/picture/take-off-one.png" />-->
-                        <div class="text-wrapper" id="arrival-city" th:text="${firstRoute.arrival}">제주</div>
-                    </div>
-                    <div class="div" id="departure-date-display" th:text="${firstRoute.departureDay}">2024.11.23.토</div>
-                </div>
-                <div class="search">
-                    <button class="search-button" onclick="window.location.href='Booking.html'">재검색</button>
-                </div>
-            </div>
-        </div>
-
-        <!-- 독립적인 bar 영역 -->
+    <div class="bar-container">
         <div class="bar">
-            <div class="left-content">
-                <img class="icons-travels" src="/picture/pennant.png" alt="pennant icon" />
-                <span class="text-wrapper-5" th:text="${firstRoute.arrival + ' 가는 편도'}">제주 가는 편도</span>
+            <div class="div-wrapper">
+                <div class="text-wrapper-2" id="trip-type">편도</div>
             </div>
-            <div class="right-content">
-                <button class="sort-button" id="sort-asc">가격 ↑</button>
-                <button class="sort-button" id="sort-desc">가격 ↓</button>
-                <div class="view-2">
-                    <span class="text-wrapper-8">최신 업데이트</span>
-                    <span class="text-wrapper-9" id="last-update-time">00:00:00</span>
+            <div class="view">
+                <div class="frame">
+                    <div class="text-wrapper" id="departure-city" th:text="${firstRoute.departure}">인천</div>
+
+                    <!--                        <img class="icons-travels-take" src="/picture/take-off-one.png" />-->
+                    <div class="text-wrapper" id="arrival-city" th:text="${firstRoute.arrival}">제주</div>
                 </div>
+                <div class="div" id="departure-date-display" th:text="${firstRoute.departureDay}">2024.11.23.토</div>
+            </div>
+            <div class="search">
+                <button class="search-button" onclick="window.location.href='Booking.html'">재검색</button>
             </div>
         </div>
+    </div>
 
-        <!-- 운항 정보 티켓 -->
-        <div th:each="route : ${routes}" class="info-ticket">
-            <div class="frame">
-                <span class="text-wrapper" th:text="${route.airline}">아시아나항공</span>
-                <span class="time departure-time" th:text="${route.departureTime}">06:40</span>
-                <img class="icons-travels-take" src="/picture/take-off.png"alt="take-off icon"/>
-                <span class="time arrival-time" th:text="${route.arrivalTime}">07:50</span>
-
-                <span class="text-wrapper-4" th:text="${route.duration}">1시간 10분</span>
-                <a th:href="${route.id}" class="text-wrapper-3 button-like"
-                   th:text="'편도 ' + ${route.price} + '원'"></a>
-
-
-            </div>
-            <hr />
-            <button class="more-button">More</button>
+    <!-- 독립적인 bar 영역 -->
+    <div class="bar">
+        <div class="left-content">
+            <img class="icons-travels" src="/picture/pennant.png" alt="pennant icon" />
+            <span class="text-wrapper-5" th:text="${firstRoute.arrival + ' 가는 편도'}">제주 가는 편도</span>
         </div>
+        <div class="right-content">
+            <button class="sort-button" id="sort-asc">가격 ↑</button>
+            <button class="sort-button" id="sort-desc">가격 ↓</button>
+            <div class="view-2">
+                <span class="text-wrapper-8">최신 업데이트</span>
+                <span class="text-wrapper-9" id="last-update-time">00:00:00</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- 운항 정보 티켓 -->
+    <div th:each="route : ${routes}" class="info-ticket">
+        <div class="frame">
+            <span class="text-wrapper" th:text="${route.airline}">아시아나항공</span>
+            <span class="time departure-time" th:text="${route.departureTime}">06:40</span>
+            <img class="icons-travels-take" src="/picture/take-off.png"alt="take-off icon"/>
+            <span class="time arrival-time" th:text="${route.arrivalTime}">07:50</span>
+
+            <span class="text-wrapper-4" th:text="${route.duration}">1시간 10분</span>
+            <a th:href="${route.id}" class="text-wrapper-3 button-like"
+               th:text="'편도 ' + ${route.price} + '원'"></a>
+
+
+        </div>
+        <hr />
+        <button class="more-button">More</button>
+    </div>
 
 </main>
 <script>
