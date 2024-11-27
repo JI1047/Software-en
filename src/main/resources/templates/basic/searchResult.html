@@ -3,20 +3,109 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>검색 결과</title>
+  <title>AYU Flight</title>
+  <link rel="stylesheet" href="/css_box/style.css" />
+  <link rel="stylesheet" href="/css_box/view_info.css" />
 </head>
 <body>
 <header>
-  <h1>검색 결과</h1>
+  <nav class="title">
+    <div class="logo">
+      <h2>3Team</h2>
+    </div>
+    <ul class="menu">
+      <li><a href="#guide">예약안내</a></li>
+      <li><a href="#info">운항정보</a></li>
+      <li><a href="view.html">예약조회</a></li>
+      <input type="checkbox" id="checkbox" />
+      <label for="checkbox" class="toggle">
+        <div class="bars" id="bar1"></div>
+        <div class="bars" id="bar2"></div>
+        <div class="bars" id="bar3"></div>
+      </label>
+    </ul>
+  </nav>
 </header>
 <main>
-  <div>
-    <p>예약번호: <span th:text="${ticket.id}">12345</span></p>
-    <p>출발지: <span th:text="${ticket.airRoute.departure}">서울</span></p>
-    <p>도착지: <span th:text="${ticket.airRoute.arrival}">부산</span></p>
-    <p>좌석 등급: <span th:text="${ticket.seatClass}">일반석</span></p>
+  <div class="flight-info">
+    <!-- 경로 정보 -->
+    <div class="route">
+      <span class="city-departure" th:text="${airRoute.departure}">인천</span>
+
+      <img
+              class="icon-takeoff"
+              src="/picture/wtake-off-one.png"
+              alt="출발 아이콘"
+      />
+      <span class="city-arrival" th:text="${airRoute.arrival}">제주</span>
+      <span class="date" th:text="${airRoute.departureDay}">2024-11-22</span>
+    </div>
+
+    <!-- 비행 정보 -->
+    <div class="details">
+      <div class="summary">
+        <span class="trip-type">편도</span>
+        <span class="airline" th:text="${airRoute.airline}">제주항공</span>
+      </div>
+
+      <div class="flight-schedule">
+        <div class="departure-info">
+          <span class="time" th:text="${airRoute.departureTime}">06:40</span>
+          <span class="location" th:text="${airRoute.departure}">인천</span>
+        </div>
+        <div class="flight-duration">
+          <img class="icon" src="/picture/take-off.png" alt="비행 시간" />
+          <span th:text="${airRoute.duration}">약 1시간 10분</span>
+        </div>
+        <div class="arrival-info">
+          <span class="time" th:text="${airRoute.arrivalTime}">07:50</span>
+          <span class="location" th:text="${airRoute.arrival}">제주</span>
+        </div>
+      </div>
+
+      <!-- 탑승자 정보 -->
+      <div class="passenger-info">
+            <span class="passenger adulst"
+            >성인 <span class="count" id="adult-count" th:text="${ticket.adultCount}">1</span>
+              </span>
+        /
+        <span class="passenger infant"
+        >유아 <span class="count" id="infant-count" th:text="${ticket.childCount}">1</span>
+              </span>
+        /
+        <span class="class" th:text="${ticket.seatClass}">일반석</span>
+      </div>
+
+
+      <div class="info-view">탑승객
+        <span th:text="${members.size()}">1</span>
+      </div>
+      <form class="form-container">
+        <fieldset class="form-group" th:each="member : ${members}">
+          <legend >이름</legend>
+          <div class="form-input" th:text="${member.name}">SIM JAE IK</div>
+        </fieldset>
+        <fieldset class="form-group" th:each="member : ${members}">
+          <legend>성별</legend>
+          <div class="form-input" th:text="${member.gender}">남자</div>
+        </fieldset>
+        <fieldset class="form-group" th:each="member : ${members}">
+          <legend>생년월일</legend>
+          <div class="form-input" th:text="${member.birthdate}">2001.03.19.</div>
+        </fieldset>
+        <fieldset class="form-group" th:each="member : ${members}">
+          <legend>전화번호</legend>
+          <div class="form-input" th:text="${member.phone}">01088460319</div>
+        </fieldset>
+        <fieldset class="form-group full-width" th:each="member : ${members}">
+          <legend>이메일</legend>
+          <div class="form-input" th:text="${member.email}">simji0319@naver.com</div>
+        </fieldset>
+      </form>
+
+    </div>
   </div>
-  <a href="/search">다시 검색</a>
 </main>
+
 </body>
 </html>

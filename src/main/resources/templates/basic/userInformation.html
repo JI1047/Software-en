@@ -1,124 +1,189 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>사용자 정보 입력</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      max-width: 600px;
-      margin: 20px auto;
-      padding: 20px;
-      border: 1px solid #ddd;
-      border-radius: 8px;
-      background-color: #f9f9f9;
-    }
-    h1 {
-      font-size: 24px;
-      text-align: center;
-      margin-bottom: 20px;
-    }
-    .form-group {
-      margin-bottom: 15px;
-    }
-    label {
-      display: block;
-      margin-bottom: 5px;
-      font-weight: bold;
-    }
-    input, select, textarea {
-      width: 100%;
-      padding: 8px;
-      margin-top: 5px;
-      border: 1px solid #ddd;
-      border-radius: 4px;
-      font-size: 14px;
-    }
-    button {
-      display: block;
-      width: 100%;
-      padding: 10px;
-      font-size: 16px;
-      font-weight: bold;
-      background-color: #5cb85c;
-      color: white;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-    }
-    button:hover {
-      background-color: #4cae4c;
-    }
-    .user-info {
-      margin-bottom: 20px;
-      border: 1px solid #ccc;
-      border-radius: 8px;
-      padding: 15px;
-      background-color: #fff;
-    }
-  </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AYU Flight</title>
+  <link rel="stylesheet" href="/css_box/style.css" />
+  <link rel="stylesheet" href="/css_box/info_style.css" />
 </head>
 <body>
-<h1>사용자 정보 입력</h1>
+<header>
+  <nav class="title">
+    <div class="logo">
+      <h2>3Team</h2>
+    </div>
+    <ul class="menu">
+      <li><a href="#guide">예약안내</a></li>
+      <li><a href="#info">운항정보</a></li>
+      <li><a href="view.html">예약조회</a></li>
+      <input type="checkbox" id="checkbox" />
+      <label for="checkbox" class="toggle">
+        <div class="bars" id="bar1"></div>
+        <div class="bars" id="bar2"></div>
+        <div class="bars" id="bar3"></div>
+      </label>
+    </ul>
+  </nav>
+</header>
+<main>
+  <h2>여행자 정보</h2>
+  <form action="/air/userInformation" method="post">
+    <!-- hidden 필드로 ticketId 전달 -->
+    <input type="hidden" name="ticketId" th:value="${ticketId}" />
 
-<!-- 사용자 입력 폼 -->
-<form action="/air/userInformation" method="post" id="userForm">
+    <div class="info">
+      <div id="passenger-container">
+        <!-- 초기 탑승객 1 정보는 기본으로 제공 -->
+        <div class="passenger-block" id="passenger-1">
+          <div class="header">
+            <h2 class="passenger-title">탑승객 1</h2>
+          </div>
+          <fieldset class="form-group">
+            <legend>이름</legend>
+            <input
+                    id="full-name-1"
+                    class="form-input"
+                    name="name"
+                    placeholder="Full Name"
+                    type="text"
+                    required
+            />
+          </fieldset>
+          <fieldset class="form-group">
+            <legend>성별</legend>
+            <select id="gender-1" class="form-input" name="gender" required>
+              <option value="" disabled selected>성별 선택</option>
+              <option value="male">남자</option>
+              <option value="female">여자</option>
+            </select>
+          </fieldset>
+          <fieldset class="form-group">
+            <legend>생년월일</legend>
+            <input
+                    id="birthday-1"
+                    class="form-input"
+                    name="birthdate"
+                    placeholder="YYYY.MM.DD"
+                    type="date"
+                    required
+            />
+          </fieldset>
+          <fieldset class="form-group">
+            <legend>전화번호</legend>
+            <input
+                    id="phone-number-1"
+                    class="form-input"
+                    name="phone"
+                    placeholder="000-0000-0000"
+                    type="tel"
+            />
+          </fieldset>
+          <fieldset class="form-group full-width">
+            <legend>이메일</legend>
+            <input
+                    id="email-1"
+                    class="form-input"
+                    name="email"
+                    placeholder="Email Address"
+                    type="email"
+                    required
+            />
+          </fieldset>
+        </div>
+      </div>
+    </div>
 
-  <input type="hidden" name="ticketId" th:value="${ticketId}">
-  <div id="user-info-container"></div>
-
-  <!-- 총 승객 수 -->
-  <input type="hidden" id="totalPassengers" name="totalPassengers" value="3">
-
-  <!-- 제출 버튼 -->
-  <button type="submit">제출</button>
-</form>
+    <!-- 경고 문구 -->
+    <div class="warning" id="warning-section">
+      <p>
+        이름을 포함한 탑승객의 모든 정보는 신분증 정보와 일치해야 합니다.<br />
+        신분증 상의 정보와 다른 경우 탑승이 불가하며, 예약 확정 후에는 정보
+        변경이 불가합니다.
+      </p>
+      <input type="hidden" id="totalPassengers" name="totalPassengers" value="3">
+      <button type="submit" class="save-button">제출</button>
+    </div>
+  </form>
+</main>
 
 <script>
   // JavaScript로 사용자 정보 입력창을 동적으로 생성
-  window.onload = function() {
-    // URL 쿼리 파라미터에서 totalPassengers 값 읽기
+  window.onload = function () {
+    // URL에서 totalPassengers 값을 가져옴
     const urlParams = new URLSearchParams(window.location.search);
-    const totalPassengers = parseInt(urlParams.get('totalPassengers'), 10) || 1; // 기본값 1 설정
-    const container = document.getElementById('user-info-container');
+    const totalPassengers = parseInt(urlParams.get("totalPassengers"), 10) || 1; // 기본값 1 설정
+    const container = document.getElementById("passenger-container");
 
-    for (let i = 1; i <= totalPassengers; i++) {
-      const userDiv = document.createElement('div');
-      userDiv.classList.add('user-info');
+    // 이미 존재하는 첫 번째 블록(탑승객 1)을 제외한 추가 블록 생성
+    for (let i = 2; i <= totalPassengers; i++) {
+      const newPassenger = document.createElement("div");
+      newPassenger.className = "passenger-block";
+      newPassenger.id = `passenger-${i}`;
 
-      // 동적으로 입력 필드를 생성
-      userDiv.innerHTML = `
-      <h3>사용자 ${i} 정보</h3>
-      <div class="form-group">
-        <label for="name${i}">이름</label>
-        <input type="text" id="name${i}" name="name" placeholder="이름을 입력하세요" required>
+      // 새 탑승객 HTML 구조
+      newPassenger.innerHTML = `
+      <div class="header">
+        <h2 class="passenger-title">탑승객 ${i}</h2>
       </div>
-      <div class="form-group">
-        <label for="gender${i}">성별</label>
-        <select id="gender${i}" name="gender" required>
-          <option value="" disabled selected>성별을 선택하세요</option>
-          <option value="male">남성</option>
-          <option value="female">여성</option>
+      <fieldset class="form-group">
+        <legend>이름</legend>
+        <input
+          id="full-name-${i}"
+          class="form-input"
+          name="name"
+          placeholder="Full Name"
+          type="text"
+          required
+        />
+      </fieldset>
+      <fieldset class="form-group">
+        <legend>성별</legend>
+        <select id="gender-${i}" class="form-input" name="gender" required>
+          <option value="" disabled selected>성별 선택</option>
+          <option value="male">남자</option>
+          <option value="female">여자</option>
         </select>
-      </div>
-      <div class="form-group">
-        <label for="email${i}">이메일</label>
-        <input type="email" id="email${i}" name="email" placeholder="example@example.com" required>
-      </div>
-      <div class="form-group">
-        <label for="phone${i}">전화번호</label>
-        <input type="tel" id="phone${i}" name="phone" placeholder="010-1234-5678" >
-      </div>
-      <div class="form-group">
-        <label for="birthdate${i}">생년월일</label>
-        <input type="date" id="birthdate${i}" name="birthdate" required>
-      </div>
+      </fieldset>
+      <fieldset class="form-group">
+        <legend>생년월일</legend>
+        <input
+          id="birthday-${i}"
+          class="form-input"
+          name="birthdate"
+          placeholder="YYYY.MM.DD"
+          type="date"
+          required
+        />
+      </fieldset>
+      <fieldset class="form-group">
+        <legend>전화번호</legend>
+        <input
+          id="phone-number-${i}"
+          class="form-input"
+          name="phone"
+          placeholder="000-0000-0000"
+          type="tel"
+        />
+      </fieldset>
+      <fieldset class="form-group full-width">
+        <legend>이메일</legend>
+        <input
+          id="email-${i}"
+          class="form-input"
+          name="email"
+          placeholder="Email Address"
+          type="email"
+          required
+        />
+      </fieldset>
     `;
 
-      container.appendChild(userDiv);
+      // 새로운 블록을 컨테이너에 추가
+      container.appendChild(newPassenger);
     }
   };
+
 
 </script>
 </body>

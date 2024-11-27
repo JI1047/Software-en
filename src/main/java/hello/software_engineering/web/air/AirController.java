@@ -6,9 +6,11 @@ import hello.software_engineering.domain.group.Group;
 import hello.software_engineering.domain.member.Member;
 import hello.software_engineering.domain.seat.SeatClass;
 import hello.software_engineering.domain.ticket.Ticket;
+import hello.software_engineering.dto.in.CreateTicketInDto;
 import hello.software_engineering.dto.in.FindAirRouteInDto;
 import hello.software_engineering.dto.in.GroupCreationRequest;
 import hello.software_engineering.repository.GroupRepository;
+import hello.software_engineering.repository.MemberRepository;
 import hello.software_engineering.repository.TicketRepository;
 import hello.software_engineering.service.*;
 import lombok.RequiredArgsConstructor;
@@ -32,6 +34,7 @@ public class AirController {
     private final GroupService groupService;
     private final TicketRepository ticketRepository;
     private final GroupRepository groupRepository;
+    private final MemberRepository memberRepository;
 
     @GetMapping
     public String home(Model model) {
@@ -77,9 +80,10 @@ public class AirController {
             @RequestParam("totalPrice") int totalPrice,
             RedirectAttributes redirectAttributes) {
 
+        CreateTicketInDto inDto = new CreateTicketInDto(airRouteId, seatClass, adultCount, childCount, totalPrice);
 
         // 예약 처리 로직
-        Long ticketId = ticketService.save(airRouteId, seatClass, adultCount, childCount, totalPrice);
+        Long ticketId = ticketService.save(inDto);
 
         // 성인 수와 아이의 수 합산
         int totalPassengers = adultCount + childCount;
@@ -168,9 +172,15 @@ public class AirController {
     public String searchResult(@RequestParam("pin") String pin, Model model) {
         // 핀 번호로 예약 정보를 검색
         Ticket ticket = ticketRepository.findByPinCode(pin);
+        AirRoute findAirRoute = ticket.getAirRoute();
+
+        Long findGroupId=ticket.getGroup().getId();
+        List<Member> members =memberRepository.findByGroupId(findGroupId);
 
 
 
+        model.addAttribute("airRoute", findAirRoute);
+        model.addAttribute("members", members);
         // 검색 결과를 모델에 추가
         model.addAttribute("ticket", ticket);
 
