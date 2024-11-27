@@ -1,0 +1,200 @@
+.flight-info {
+    width: 100%;
+    max-width: 600px;
+    margin: 20px auto; /* 화면 중앙 정렬 */
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 부드러운 그림자 */
+    padding: 16px;
+}
+
+/* Route 섹션 */
+.route {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #608FF1;
+    padding: 16px;
+    width: 100%;
+    border-radius: 8px;
+    margin-bottom: 16px;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.route .city-departure,
+.route .city-arrival {
+    font-size: 17px;
+    font-weight: bold;
+    color: white;
+}
+
+.route .date {
+    font-size: 17px;
+    color: #ffffff;
+    margin-left: auto;
+}
+
+.route .icon-takeoff {
+    margin: 0px 10px 0px 10px;
+}
+
+/* Details 박스 가로 정렬 */
+.details {
+    background-color: white;
+    width: 100%;
+    border-top: 2px solid #ddd;
+    border-bottom: 2px solid #ddd;
+    padding: 10px;
+    margin-bottom: 16px;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+    display: flex; /* 플렉스 박스 사용 */
+    justify-content: space-between; /* 내부 요소 간격 */
+    align-items: center; /* 세로 정렬 */
+}
+
+/* summary 글자 크기 조정 */
+.summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 140px;
+}
+
+.summary .trip-type {
+    font-size: 20px;
+    font-weight: bold;
+    color: #608FF1;
+    width: 60px;
+
+}
+
+.summary .airline {
+    font-size: 15px;
+    width: 52px;
+}
+
+/* flight-schedule의 가로 정렬 */
+.flight-schedule {
+    display: flex; /* 가로로 정렬 */
+    justify-content: space-between; /* 균등 배치 */
+    align-items: flex-start; /* 상단 정렬 */
+    width: 100%;
+}
+
+/* 각 박스의 위-아래 정렬 */
+.departure-info {
+    display: grid; /* grid를 사용하여 시간과 텍스트를 위아래로 정렬 */
+    grid-template-rows: auto auto; /* 두 행으로 구성 */
+    text-align: center; /* 중앙 정렬 */
+    flex: 1; /* 모든 박스를 동일한 너비로 설정 */
+    margin-left: 40px;
+}
+.arrival-info {
+    display: grid; /* grid를 사용하여 시간과 텍스트를 위아래로 정렬 */
+    grid-template-rows: auto auto; /* 두 행으로 구성 */
+    text-align: center; /* 중앙 정렬 */
+    flex: 1; /* 모든 박스를 동일한 너비로 설정 */
+    margin-right: 40px;
+}
+
+.flight-duration {
+    display: grid; /* grid 레이아웃으로 분자/분모 구성 */
+    grid-template-rows: auto auto; /* 두 개의 행 생성 */
+    justify-items: center; /* 가로 중앙 정렬 */
+    align-items: center; /* 세로 중앙 정렬 */
+    text-align: center;
+}
+
+/* 시간(위) */
+.departure-info .time {
+    grid-row: 1; /* 첫 번째 줄 */
+    font-size: 14px; /* 시간 글자 크기 */
+    color: #333;
+}
+.arrival-info .time {
+    grid-row: 1; /* 첫 번째 줄 */
+    font-size: 14px; /* 시간 글자 크기 */
+    color: #333;
+}
+.flight-duration img {
+    grid-row: 1; /* 첫 번째 줄 */
+    width: 24px; /* 아이콘 크기 (필요에 따라 조정 가능) */
+    height: 24px; /* 아이콘 크기 (필요에 따라 조정 가능) */
+}
+
+.flight-duration span {
+    grid-row: 2; /* 두 번째 줄 */
+    font-size: 12px; /* 텍스트 크기 */
+    color: #666;
+}
+
+/* 텍스트(아래) */
+.departure-info .location,
+.arrival-info .location {
+    grid-row: 2; /* 두 번째 줄 */
+    font-size: 12px; /* 텍스트 글자 크기 */
+    color: #666;
+}
+
+/* passenger-info 글자 크기 조정 */
+.passenger-info {
+    font-size: 12px; /* 원하는 크기로 설정 */
+    color: #666; /* 색상 조정 (선택 사항) */
+    width: 200px;
+}
+
+/* -------------------------------------------------------------------------------------------- */
+/* 추가된 폼 사이 간격 */
+.form-container + .form-container {
+    margin-top: 20px;
+}
+
+.info-view{
+    margin: 40px 0px 20px 20px;
+    font-size: 20px;
+    font-weight: 600;
+    color: #608FF1;
+}
+
+/* 폼 컨테이너 */
+.form-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    width: 530px;
+    margin-left: 20px;
+    margin-bottom: 10px;
+    padding: 20px 0px 10px 20px;
+    border: 1px solid #c5c2c2;
+    border-radius: 10px;
+}
+
+.form-group {
+    border: none; /* 그룹 박스 테두리 표시 */
+    border-radius: 5px;
+    padding: 5px;
+    position: relative;
+    height: 60px;
+}
+
+.form-group .full-width {
+    grid-column: span 2; /* 이메일 필드는 가로로 길게 */
+}
+
+legend {
+    font-size: 15px;
+    font-weight: 500;
+    color: #000;
+    padding: 0px 5px 0px 10px;
+}
+
+/* 입력 필드 */
+.form-input {
+    width: 100%;
+    padding: 0px 0px 0px 12px;
+    font-size: 14px;
+    border: none; /* 입력 필드 테두리 제거 */
+    border-radius: 5px;
+    background-color: transparent; /* 연한 배경색 추가 */
+    color: #333;
+}
