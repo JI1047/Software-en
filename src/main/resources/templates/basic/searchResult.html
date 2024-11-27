@@ -77,33 +77,33 @@
       </div>
 
 
-      <div class="info-view">탑승객
-        <span th:text="${members.size()}">1</span>
-      </div>
-      <form class="form-container">
-        <fieldset class="form-group" th:each="member : ${members}">
-          <legend >이름</legend>
-          <div class="form-input" th:text="${member.name}">SIM JAE IK</div>
-        </fieldset>
-        <fieldset class="form-group" th:each="member : ${members}">
-          <legend>성별</legend>
-          <div class="form-input" th:text="${member.gender}">남자</div>
-        </fieldset>
-        <fieldset class="form-group" th:each="member : ${members}">
-          <legend>생년월일</legend>
-          <div class="form-input" th:text="${member.birthdate}">2001.03.19.</div>
-        </fieldset>
-        <fieldset class="form-group" th:each="member : ${members}">
-          <legend>전화번호</legend>
-          <div class="form-input" th:text="${member.phone}">01088460319</div>
-        </fieldset>
-        <fieldset class="form-group full-width" th:each="member : ${members}">
-          <legend>이메일</legend>
-          <div class="form-input" th:text="${member.email}">simji0319@naver.com</div>
-        </fieldset>
-      </form>
-
-    </div>
+    </form>
+    
+  </div>
+  <div class="info-view">탑승객
+    <span th:text="${members.size()}">1</span>
+  </div>
+  <form class="form-container">
+    <fieldset class="form-group" th:each="member : ${members}">
+      <legend >이름</legend>
+      <div class="form-input" th:text="${member.name}">SIM JAE IK</div>
+    </fieldset>
+    <fieldset class="form-group" th:each="member : ${members}">
+      <legend>성별</legend>
+      <div class="form-input" th:text="${member.gender}">남자</div>
+    </fieldset>
+    <fieldset class="form-group" th:each="member : ${members}">
+      <legend>생년월일</legend>
+      <div class="form-input" th:text="${member.birthdate}">2001.03.19.</div>
+    </fieldset>
+    <fieldset class="form-group" th:each="member : ${members}">
+      <legend>전화번호</legend>
+      <div class="form-input" th:text="${member.phone}">01088460319</div>
+    </fieldset>
+    <fieldset class="form-group full-width" th:each="member : ${members}">
+      <legend>이메일</legend>
+      <div class="form-input" th:text="${member.email}">simji0319@naver.com</div>
+    </fieldset>
   </div>
 </main>
 
