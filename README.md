@@ -6,5 +6,6 @@
 
 https://www.youtube.com/watch?v=UYCkyXUS770
 
-설명 pdf
-[항공기 예약 설명.pdf](https://github.com/user-attachments/files/17967958/default.pdf)
+
+보고서.docx
+[항공기 예약 시스템.docx](https://github.com/user-attachments/files/18007471/default.docx)
